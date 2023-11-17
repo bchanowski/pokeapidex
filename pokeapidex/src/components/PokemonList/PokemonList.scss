@@ -1,0 +1,10 @@
+.pokemon-card-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pokemon-card {
+  width: 20vw;
+  height: 30vh;
+  margin: 10px;
+}

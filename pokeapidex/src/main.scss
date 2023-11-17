@@ -1,0 +1,8 @@
+@import "./shared/shared.scss";
+
+html,
+body {
+  margin: 0px;
+  background-color: $background-color;
+  font-family: "Rubik Mono One", monospace;
+}
