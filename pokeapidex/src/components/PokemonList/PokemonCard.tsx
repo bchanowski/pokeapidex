@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { IPokemon } from "./PokemonInterface";
 import "./PokemonList.scss";
 import "@/shared/types.scss";
@@ -8,12 +9,21 @@ type Props = {
 
 const PokemonCard = ({ pokemon }: Props) => {
   const typeClass = "pokemon type-" + pokemon.types[0].type.name;
+  const [pokemonId, setPokemonId] = useState("");
+  useEffect(() => {
+    if (pokemon.id.toString().length === 3) return;
+    else if (pokemon.id.toString().length === 0)
+      setPokemonId("000" + pokemon.id);
+    else if (pokemon.id.toString().length === 1)
+      setPokemonId("00" + pokemon.id);
+    else if (pokemon.id.toString().length === 2) setPokemonId("0" + pokemon.id);
+  }, [pokemon.id]);
   return (
     <>
       <div className="pokemon-card">
         <div className={typeClass}>
           <p className="pokemon-text">
-            #{pokemon.id} {pokemon.name}
+            #{pokemonId} {pokemon.name}
           </p>
           <div className="pokemon-image-container">
             <img
