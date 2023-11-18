@@ -28,6 +28,7 @@ const PokemonList = () => {
       if (i > 1017) return;
       const newPokemon = await getPokemonData(i);
       if (newPokemon) {
+        console.log(newPokemon);
         setPokemonData((prevState) => ({
           pokemons: [...prevState.pokemons, newPokemon],
         }));

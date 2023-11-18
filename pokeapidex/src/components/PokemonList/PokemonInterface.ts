@@ -4,4 +4,5 @@ export interface IPokemon {
   sprites: {
     front_default: string;
   };
+  types: Array<{ type: { name: string } }>;
 }

@@ -12,13 +12,16 @@ export const getPokemonData = async (
       id,
       name,
       sprites: { front_default },
+      types,
     } = response.data;
+    console.log(response.data);
     const newPokemon: IPokemon = {
       id,
       name,
       sprites: {
         front_default,
       },
+      types,
     };
     return newPokemon;
   } catch (error) {
