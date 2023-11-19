@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { IPokemon } from "./PokemonInterface";
+import { PokemonType } from "@/shared/types";
 import "./PokemonList.scss";
 import "@/shared/types.scss";
 
 type Props = {
-  pokemon: IPokemon;
+  pokemon: PokemonType;
 };
 
 const PokemonCard = ({ pokemon }: Props) => {
