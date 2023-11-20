@@ -1,11 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import isSearchingReducer from "./slices/isSearchingSlice";
+import searchingReducer from "./slices/isSearchingSlice";
 import pokemonDataReducer from "./slices/pokemonDataSlice";
+import isPokemonDataLoadingReducer from "./slices/isPokemonDataLoading";
+import counterReducer from "./slices/counterSlice";
 
 const store = configureStore({
   reducer: {
-    isSearching: isSearchingReducer,
+    isSearching: searchingReducer,
     pokemonData: pokemonDataReducer,
+    isPokemonDataLoading: isPokemonDataLoadingReducer,
+    counter: counterReducer,
   },
 });
 

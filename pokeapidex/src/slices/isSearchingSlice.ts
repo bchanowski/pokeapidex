@@ -4,7 +4,7 @@ const initialState = {
   value: false,
 };
 
-const isSearchingSlice = createSlice({
+const searchingSlice = createSlice({
   name: "isSearching",
   initialState,
   reducers: {
@@ -14,6 +14,6 @@ const isSearchingSlice = createSlice({
   },
 });
 
-export const { setIsSearching } = isSearchingSlice.actions;
+export const { setIsSearching } = searchingSlice.actions;
 
-export default isSearchingSlice.reducer;
+export default searchingSlice.reducer;

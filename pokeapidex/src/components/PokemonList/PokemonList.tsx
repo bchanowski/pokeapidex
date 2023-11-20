@@ -1,49 +1,42 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import { PokemonType } from "@/shared/types";
-import { getPokemonData } from "@/shared/getPokemonData";
 import PokemonCard from "./PokemonCard";
 import "./PokemonList.scss";
 import LoadingSpinner from "@/shared/LoadingSpinner";
 import { isAtBottom } from "./getIfAtBottom";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { setPokemonData } from "@/slices/pokemonDataSlice";
+import { useFetchData } from "@/shared/fetchPokemons";
+import { setCounter } from "@/slices/counterSlice";
 
 const PokemonList = () => {
   const pokemonData = useAppSelector((state) => state.pokemonData);
   const isSearching = useAppSelector((state) => state.isSearching.value);
+  const { fetchPokemons } = useFetchData();
   const dispatch = useAppDispatch();
-  const [counter, setCounter] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
+    if (isSearching) return;
     const atBottom = isAtBottom();
-    if (atBottom) setCounter((prevState) => prevState + 2);
-  };
-  const fetchPokemons = useCallback(async () => {
-    if (counter > 1017) return;
-    setIsLoading(true);
-    for (let i = counter; i < counter + 2; i++) {
-      if (i > 1017) return;
-      const newPokemon = await getPokemonData(i);
-      if (newPokemon) {
-        console.log(newPokemon);
-        dispatch(setPokemonData(newPokemon));
-      }
+    if (atBottom) {
+      dispatch(setCounter(2));
+      fetchPokemons();
     }
-    setIsLoading(false);
-  }, [counter, dispatch]);
+  }, [dispatch, fetchPokemons, isSearching]);
   useEffect(() => {
     if (!isSearching) fetchPokemons();
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [fetchPokemons, isSearching]);
+  }, [handleScroll, fetchPokemons, isSearching]);
   return (
     <div className="pokemon-card-container" onScroll={handleScroll}>
-      {pokemonData.pokemons.map((pokemon: PokemonType, key) => (
-        <PokemonCard key={key} pokemon={pokemon} />
-      ))}
-      <LoadingSpinner isLoading={isLoading} />
+      {pokemonData.pokemons.length > 0 ? (
+        pokemonData.pokemons.map((pokemon: PokemonType, key) => (
+          <PokemonCard key={key} pokemon={pokemon} />
+        ))
+      ) : (
+        <LoadingSpinner />
+      )}
     </div>
   );
 };

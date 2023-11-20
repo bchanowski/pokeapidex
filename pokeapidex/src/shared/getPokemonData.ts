@@ -4,6 +4,7 @@ import { PokemonType, PokemonsListType } from "./types";
 export const getPokemonData = async (
   pokemonValue: number | string
 ): Promise<PokemonType | null> => {
+  console.log("test");
   try {
     const response = await axios.get(
       "https://pokeapi.co/api/v2/pokemon/" + pokemonValue
@@ -14,7 +15,6 @@ export const getPokemonData = async (
       sprites: { front_default },
       types,
     } = response.data;
-    console.log(response.data);
     const newPokemon: PokemonType = {
       id,
       name,
@@ -36,7 +36,6 @@ export const getPokemonList = async (): Promise<PokemonsListType | null> => {
       "https://pokeapi.co/api/v2/pokemon?offset=1&limit=1016"
     );
     const newPokemonList: PokemonsListType = response.data.results;
-    console.log(newPokemonList);
     return newPokemonList;
   } catch (error) {
     console.error(error);

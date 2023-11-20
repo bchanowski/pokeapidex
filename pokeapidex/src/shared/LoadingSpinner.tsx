@@ -1,11 +1,7 @@
 import { Oval } from "react-loader-spinner";
 import "./shared.scss";
 
-type Props = {
-  isLoading: boolean;
-};
-
-const LoadingSpinner = ({ isLoading }: Props) => {
+const LoadingSpinner = () => {
   return (
     <div className="loading-spinner">
       <Oval
@@ -14,7 +10,7 @@ const LoadingSpinner = ({ isLoading }: Props) => {
         color="#3b4cca"
         wrapperStyle={{}}
         wrapperClass=""
-        visible={isLoading}
+        visible={true}
         ariaLabel="oval-loading"
         secondaryColor="#3b4cca"
         strokeWidth={2}
