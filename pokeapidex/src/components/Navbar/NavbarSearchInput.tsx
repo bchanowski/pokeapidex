@@ -2,47 +2,29 @@ import "./Navbar.scss";
 import { IoSearchCircle } from "react-icons/io5";
 import { getPokemonList } from "@/shared/getPokemonData";
 import { useAppDispatch } from "@/hooks";
-import { setIsSearching } from "@/slices/isSearchingSlice";
 import { useEffect, useState } from "react";
-import { PokemonsListType } from "@/shared/types";
-import { useFetchData } from "@/shared/fetchPokemons";
+import { useFetchPokemons } from "@/shared/useFetchPokemons";
 import { setPokemonDataToInitial } from "@/slices/pokemonDataSlice";
 import { setCounterReset } from "@/slices/counterSlice";
-import { setIsPokemonDataLoading } from "@/slices/isPokemonDataLoading";
+import { setIsSearching, setSearchingValue } from "@/slices/isSearchingSlice";
+import { setPokemonList } from "@/slices/pokemonListSlice";
 
 const NavbarSearchInput = () => {
   const dispatch = useAppDispatch();
-  const { fetchPokemons } = useFetchData();
-  const [pokemonList, setPokemonList] = useState<PokemonsListType | null>();
+  const { fetchPokemonsById, fetchPokemonsByName } = useFetchPokemons();
+  const [previousValue, setPreviousValue] = useState("");
   const handleSearchChange = async (e: React.FormEvent<HTMLInputElement>) => {
-    if (e.currentTarget.value.length >= 3) {
-      dispatch(setPokemonDataToInitial());
-      dispatch(setIsSearching(true));
-      dispatch(setIsPokemonDataLoading(true));
-      const startsWith = e.currentTarget.value;
-      if (pokemonList) {
-        const filteredPokemonList = pokemonList.filter((pokemon) =>
-          pokemon.name.startsWith(startsWith)
-        );
-
-        for (let i = 0; i < filteredPokemonList.length; i++) {
-          fetchPokemons(filteredPokemonList[i].name);
-        }
-      }
-    } else if (e.currentTarget.value.length === 0) {
-      dispatch(setIsSearching(false));
-      dispatch(setPokemonDataToInitial());
-      dispatch(setCounterReset());
-      fetchPokemons();
-    }
+    dispatch(setPokemonDataToInitial());
+    dispatch(setCounterReset());
+    dispatch(setSearchingValue(e.currentTarget.value));
   };
 
   useEffect(() => {
     const fetchPokemonList = async () => {
-      setPokemonList(await getPokemonList());
+      dispatch(setPokemonList(await getPokemonList()));
     };
     fetchPokemonList();
-  }, []);
+  }, [dispatch]);
   return (
     <div className="navbar-right-search-container">
       <label htmlFor="search-input" className="search-input-label">

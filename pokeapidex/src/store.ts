@@ -3,6 +3,7 @@ import searchingReducer from "./slices/isSearchingSlice";
 import pokemonDataReducer from "./slices/pokemonDataSlice";
 import isPokemonDataLoadingReducer from "./slices/isPokemonDataLoading";
 import counterReducer from "./slices/counterSlice";
+import pokemonListReducer from "./slices/pokemonListSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     pokemonData: pokemonDataReducer,
     isPokemonDataLoading: isPokemonDataLoadingReducer,
     counter: counterReducer,
+    pokemonList: pokemonListReducer,
   },
 });
 

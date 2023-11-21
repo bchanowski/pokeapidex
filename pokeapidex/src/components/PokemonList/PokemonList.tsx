@@ -5,13 +5,13 @@ import "./PokemonList.scss";
 import LoadingSpinner from "@/shared/LoadingSpinner";
 import { isAtBottom } from "./getIfAtBottom";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { useFetchData } from "@/shared/fetchPokemons";
+import { useFetchPokemons } from "@/shared/useFetchPokemons";
 import { setCounter } from "@/slices/counterSlice";
 
 const PokemonList = () => {
   const pokemonData = useAppSelector((state) => state.pokemonData);
   const isSearching = useAppSelector((state) => state.isSearching.value);
-  const { fetchPokemons } = useFetchData();
+  const { fetchPokemons } = useFetchPokemons();
   const dispatch = useAppDispatch();
   const handleScroll = useCallback(() => {
     if (isSearching) return;
