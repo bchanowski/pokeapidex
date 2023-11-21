@@ -12,9 +12,8 @@ export function useFetchPokemons() {
     fetchPokemons: useCallback(async () => {
       if (pokemonList) {
         if (searchValue.length > 0) {
-          console.log("no loop pls");
           const filteredPokemonList = pokemonList.filter((pokemon) =>
-            pokemon.name.startsWith(searchValue)
+            pokemon.name.startsWith(searchValue.toLowerCase())
           );
 
           for (let i = counter - 1; i < counter + 2; i++) {
