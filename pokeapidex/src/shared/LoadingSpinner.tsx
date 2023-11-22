@@ -1,7 +1,11 @@
 import { Oval } from "react-loader-spinner";
 import "./shared.scss";
+import { useAppSelector } from "@/hooks";
 
 const LoadingSpinner = () => {
+  const isDataLoading = useAppSelector(
+    (state) => state.isPokemonDataLoading.value
+  );
   return (
     <div className="loading-spinner">
       <Oval
@@ -10,7 +14,7 @@ const LoadingSpinner = () => {
         color="#3b4cca"
         wrapperStyle={{}}
         wrapperClass=""
-        visible={true}
+        visible={isDataLoading}
         ariaLabel="oval-loading"
         secondaryColor="#3b4cca"
         strokeWidth={2}

@@ -3,6 +3,7 @@ import { getPokemonData } from "@/shared/getPokemonData";
 import { setIsPokemonDataLoading } from "@/slices/isPokemonDataLoading";
 import { setPokemonData } from "@/slices/pokemonDataSlice";
 import { useCallback } from "react";
+import { getPokemonCounterValue } from "./getPokemonCounterValue";
 export function useFetchPokemons() {
   const dispatch = useAppDispatch();
   const counter = useAppSelector((state) => state.counter.value);
@@ -27,8 +28,9 @@ export function useFetchPokemons() {
           }
         } else {
           if (counter > 1017) return;
+          const counterValue = getPokemonCounterValue();
           dispatch(setIsPokemonDataLoading(true));
-          for (let i = counter; i < counter + 2; i++) {
+          for (let i = counter; i < counter + counterValue; i++) {
             if (i > 1017) return;
             const newPokemon = await getPokemonData(i);
             if (newPokemon) {

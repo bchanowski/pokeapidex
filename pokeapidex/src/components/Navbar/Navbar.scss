@@ -3,6 +3,8 @@
 .navbar-container {
   display: flex;
   font-size: $small-font-size;
+  position: fixed;
+  top: 0;
   @media screen and (max-width: 700px) {
     flex-direction: column;
   }
@@ -88,6 +90,7 @@
   right: 1rem;
   top: 5px;
   font-size: calc($big-font-size * 2);
+  color: $color-golden;
   @media screen and (max-width: 900px) {
     font-size: $big-font-size;
     top: 1rem;

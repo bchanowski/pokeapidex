@@ -24,6 +24,7 @@ const NavbarSearchInput = () => {
     dispatch(setSearchingValue(latestInputValue));
   }, [dispatch]);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     const newValue = event.target.value;
     inputValueRef.current = newValue;
     if (timeoutId) {
@@ -44,7 +45,11 @@ const NavbarSearchInput = () => {
         placeholder="Type a pokemon name..."
         onChange={handleChange}
       />
-      <IoSearchCircle className="search-input-icon" />
+      {inputValueRef.current.length === 0 ? (
+        <IoSearchCircle className="search-input-icon" />
+      ) : (
+        <></>
+      )}
     </label>
   );
 };

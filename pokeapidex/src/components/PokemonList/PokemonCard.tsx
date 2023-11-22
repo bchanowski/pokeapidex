@@ -11,12 +11,12 @@ const PokemonCard = ({ pokemon }: Props) => {
   const typeClass = "pokemon type-" + pokemon.types[0].type.name;
   const [pokemonId, setPokemonId] = useState("");
   useEffect(() => {
-    if (pokemon.id.toString().length === 3) return;
-    else if (pokemon.id.toString().length === 0)
-      setPokemonId("000" + pokemon.id);
+    if (pokemon.id.toString().length === 4) setPokemonId(pokemon.id.toString());
     else if (pokemon.id.toString().length === 1)
+      setPokemonId("000" + pokemon.id);
+    else if (pokemon.id.toString().length === 2)
       setPokemonId("00" + pokemon.id);
-    else if (pokemon.id.toString().length === 2) setPokemonId("0" + pokemon.id);
+    else if (pokemon.id.toString().length === 3) setPokemonId("0" + pokemon.id);
   }, [pokemon.id]);
   return (
     <>
@@ -39,18 +39,6 @@ const PokemonCard = ({ pokemon }: Props) => {
               : ""}
           </p>
         </div>
-      </div>
-      <div className="pokemon-card">
-        <div className={typeClass}>{pokemon.name}</div>
-      </div>
-      <div className="pokemon-card">
-        <div className={typeClass}>{pokemon.name}</div>
-      </div>
-      <div className="pokemon-card">
-        <div className={typeClass}>{pokemon.name}</div>
-      </div>
-      <div className="pokemon-card">
-        <div className={typeClass}>{pokemon.name}</div>
       </div>
     </>
   );

@@ -7,6 +7,7 @@ import { isAtBottom } from "./getIfAtBottom";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { useFetchPokemons } from "@/shared/useFetchPokemons";
 import { setCounter } from "@/slices/counterSlice";
+import { getPokemonCounterValue } from "@/shared/getPokemonCounterValue";
 
 const PokemonList = () => {
   const pokemonData = useAppSelector((state) => state.pokemonData);
@@ -17,7 +18,7 @@ const PokemonList = () => {
     if (isSearching) return;
     const atBottom = isAtBottom();
     if (atBottom) {
-      dispatch(setCounter(2));
+      dispatch(setCounter(getPokemonCounterValue()));
       fetchPokemons();
     }
   }, [dispatch, fetchPokemons, isSearching]);
@@ -30,13 +31,11 @@ const PokemonList = () => {
   }, [handleScroll, fetchPokemons, isSearching]);
   return (
     <div className="pokemon-card-container" onScroll={handleScroll}>
-      {pokemonData.pokemons.length > 0 ? (
-        pokemonData.pokemons.map((pokemon: PokemonType, key) => (
-          <PokemonCard key={key} pokemon={pokemon} />
-        ))
-      ) : (
-        <LoadingSpinner />
-      )}
+      {pokemonData.pokemons.map((pokemon: PokemonType, key) => (
+        <PokemonCard key={key} pokemon={pokemon} />
+      ))}
+
+      <LoadingSpinner />
     </div>
   );
 };
