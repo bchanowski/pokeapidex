@@ -8,19 +8,14 @@ export const getPokemonData = async (
 ): Promise<PokemonType | null> => {
   try {
     const response = await axios.get(BASE_URL + "/" + pokemonValue);
-    const {
-      id,
-      name,
-      sprites: { front_default },
-      types,
-    } = response.data;
+    const { id, name, sprites, types, abilities, stats } = response.data;
     const newPokemon: PokemonType = {
       id,
       name,
-      sprites: {
-        front_default,
-      },
+      sprites,
       types,
+      abilities,
+      stats,
     };
     return newPokemon;
   } catch (error) {

@@ -1,0 +1,23 @@
+@import "@/shared/shared.scss";
+
+.pokemon-page-container {
+  margin-top: 20svh;
+  height: 75svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pokemon-page-card {
+  width: 90%;
+  height: 95%;
+  border-radius: 10svh;
+  color: $background-color;
+}
+
+.pokemon-page-img {
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 30svh;
+  border-radius: 15px;
+  margin: 5px;
+}

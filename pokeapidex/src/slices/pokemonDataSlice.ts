@@ -17,10 +17,13 @@ const pokemonDataSlice = createSlice({
       state.pokemons[action.payload.id] = action.payload;
     },
     setPokemonDataToInitial: () => initialState,
+    setSelectedPokemon: (state, action: PayloadAction<PokemonType>) => {
+      state.pokemons[0] = action.payload;
+    },
   },
 });
 
-export const { setPokemonData, setPokemonDataToInitial } =
+export const { setPokemonData, setPokemonDataToInitial, setSelectedPokemon } =
   pokemonDataSlice.actions;
 
 export default pokemonDataSlice.reducer;

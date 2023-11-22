@@ -3,7 +3,7 @@
 .pokemon-card-container {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 25svh;
+  margin-top: 20svh;
   margin-left: 25px;
   @media screen and (max-width: 700px) {
     margin-top: 35svh;
@@ -11,6 +11,9 @@
 }
 
 .pokemon-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   animation-duration: 1s;
   animation-name: slidein;
   height: 400px;
@@ -36,7 +39,12 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  cursor: pointer;
+  transition: 0.1s ease-out;
+  &:hover {
+    width: 95%;
+    height: 95%;
+  }
 }
 
 .pokemon-text {

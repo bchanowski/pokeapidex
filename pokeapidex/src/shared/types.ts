@@ -3,8 +3,11 @@ export type PokemonType = {
   name: string;
   sprites: {
     front_default: string;
+    front_shiny: string;
   };
   types: Array<{ type: { name: string } }>;
+  abilities: Array<{ ability: { name: string } }>;
+  stats: Array<{ base_stat: number; stat: { name: string } }>;
 };
 
 export type PokemonListType = {

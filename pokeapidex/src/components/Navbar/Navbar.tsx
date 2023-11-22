@@ -6,7 +6,9 @@ const Navbar = () => {
   return (
     <div className="navbar-container">
       <div className="image-container">
-        <img alt="pokeapi-logo" src={pokeapiLogo} className="navbar-logo" />
+        <a href="/">
+          <img alt="pokeapi-logo" src={pokeapiLogo} className="navbar-logo" />
+        </a>
       </div>
       <NavbarRightSide />
     </div>
