@@ -12,6 +12,10 @@ export type PokemonType = {
   stats: Array<{ base_stat: number; stat: { name: string } }>;
 };
 
+export type PokemonTypeState = {
+  pokemons: PokemonType[];
+};
+
 export type PokemonListType = {
   name: string;
 };

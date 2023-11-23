@@ -1,9 +1,5 @@
-import { PokemonType } from "@/shared/types";
+import { PokemonType, PokemonTypeState } from "@/shared/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-type PokemonTypeState = {
-  pokemons: PokemonType[];
-};
 
 const initialState: PokemonTypeState = {
   pokemons: [],
