@@ -4,7 +4,7 @@ import { setIsPokemonDataLoading } from "@/slices/isPokemonDataLoading";
 import { setPokemonData, setPokemons } from "@/slices/pokemonDataSlice";
 import { useCallback } from "react";
 import { getPokemonCounterValue } from "./getPokemonCounterValue";
-import { PokemonType, PokemonTypeState } from "./types";
+import { PokemonTypeState } from "./types";
 export function useFetchPokemons() {
   const dispatch = useAppDispatch();
   const counter = useAppSelector((state) => state.counter.value);
