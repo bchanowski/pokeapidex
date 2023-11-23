@@ -27,3 +27,8 @@ The app is also responsive to mobile devices
 ![image](https://github.com/bchanowski/pokeapidex-react-ts/assets/92587389/296e6990-42c1-4275-9738-358ced1205f9)
 ![image](https://github.com/bchanowski/pokeapidex-react-ts/assets/92587389/7b11d209-bcac-40a8-b3cc-94c640c3416a)
 
+### WIP  
+-Sorting by generation  
+-Sorting by type
+-Abilities and types tooltips
+-Evolution chart
