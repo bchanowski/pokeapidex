@@ -1,23 +1,73 @@
 @import "@/shared/shared.scss";
 
 .pokemon-page-container {
-  margin-top: 20svh;
-  height: 75svh;
+  margin: 25svh 0px;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 700px) {
+    margin-top: 35svh;
+  }
 }
 
 .pokemon-page-card {
-  width: 90%;
+  width: 80%;
   height: 95%;
   border-radius: 10svh;
   color: $background-color;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 70px 0px;
+  font-size: $font-size;
+  text-align: center;
+  @media screen and (max-width: 400px) {
+    width: 90%;
+  }
 }
 
 .pokemon-page-img {
   background-color: rgba(0, 0, 0, 0.2);
   height: 30svh;
   border-radius: 15px;
-  margin: 5px;
+  margin: 30px 10px;
+}
+
+.pokemon-page-text {
+  display: inline-block;
+  margin: 5px 10px;
+}
+
+.range-view {
+  background-color: $background-color;
+  border-radius: 100rem;
+  height: 5px;
+  margin: 0 10px;
+}
+
+.pokemon-page-left-side {
+  width: 80%;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  padding: 25px;
+}
+
+.pokemon-page-data-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  @media screen and (max-width: 705px) {
+    flex-direction: column;
+    margin: 0px;
+    padding: 0px;
+  }
+}
+
+.pokemon-page-title {
+  font-size: $big-font-size;
 }

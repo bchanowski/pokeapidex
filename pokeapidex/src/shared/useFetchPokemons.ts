@@ -1,9 +1,10 @@
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getPokemonData } from "@/shared/getPokemonData";
 import { setIsPokemonDataLoading } from "@/slices/isPokemonDataLoading";
-import { setPokemonData } from "@/slices/pokemonDataSlice";
+import { setPokemonData, setPokemons } from "@/slices/pokemonDataSlice";
 import { useCallback } from "react";
 import { getPokemonCounterValue } from "./getPokemonCounterValue";
+import { PokemonType } from "./types";
 export function useFetchPokemons() {
   const dispatch = useAppDispatch();
   const counter = useAppSelector((state) => state.counter.value);
@@ -27,16 +28,28 @@ export function useFetchPokemons() {
             }
           }
         } else {
-          if (counter > 1017) return;
+          if (counter > 1017) {
+            dispatch(setIsPokemonDataLoading(false));
+            return;
+          }
           const counterValue = getPokemonCounterValue();
           dispatch(setIsPokemonDataLoading(true));
+          type PokemonTypeState = {
+            pokemons: PokemonType[];
+          };
+
+          const initialState: PokemonTypeState = {
+            pokemons: [],
+          };
           for (let i = counter; i < counter + counterValue; i++) {
             if (i > 1017) return;
             const newPokemon = await getPokemonData(i);
             if (newPokemon) {
-              dispatch(setPokemonData(newPokemon));
+              initialState.pokemons[i] = newPokemon;
+              //dispatch(setPokemonData(newPokemon));
             }
           }
+          dispatch(setPokemons(initialState));
           dispatch(setIsPokemonDataLoading(false));
         }
       }

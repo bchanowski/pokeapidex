@@ -2,6 +2,7 @@
 
 .pokemon-card-container {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   margin-top: 20svh;
   margin-left: 25px;
@@ -14,7 +15,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
   animation-name: slidein;
   height: 400px;
   width: 20rem;

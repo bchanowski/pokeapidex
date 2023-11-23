@@ -4,6 +4,8 @@ export type PokemonType = {
   sprites: {
     front_default: string;
     front_shiny: string;
+    back_default: string;
+    back_shiny: string;
   };
   types: Array<{ type: { name: string } }>;
   abilities: Array<{ ability: { name: string } }>;

@@ -34,7 +34,6 @@ const PokemonList = () => {
       {pokemonData.pokemons.map((pokemon: PokemonType, key) => (
         <PokemonCard key={key} pokemon={pokemon} />
       ))}
-
       <LoadingSpinner />
     </div>
   );

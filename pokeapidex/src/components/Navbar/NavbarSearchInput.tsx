@@ -4,11 +4,14 @@ import { useAppDispatch } from "@/hooks";
 import { setPokemonDataToInitial } from "@/slices/pokemonDataSlice";
 import { setCounterReset } from "@/slices/counterSlice";
 import { setSearchingValue } from "@/slices/isSearchingSlice";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const NavbarSearchInput = () => {
   const dispatch = useAppDispatch();
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout>();
   const inputValueRef = useRef<string>("");
+  const location = useLocation();
+  const navigate = useNavigate();
   const delay = 1000;
   useEffect(() => {
     return () => {
@@ -27,13 +30,21 @@ const NavbarSearchInput = () => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     const newValue = event.target.value;
     inputValueRef.current = newValue;
-    if (timeoutId) {
-      clearTimeout(timeoutId);
-    }
-    const newTimeoutId = setTimeout(() => {
+    if (location.pathname === "/") {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      const newTimeoutId = setTimeout(() => {
+        handleSearchChange();
+      }, delay);
+      setTimeoutId(newTimeoutId);
+    } else dispatch(setSearchingValue(inputValueRef.current));
+  };
+  const handleEnter = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (location.pathname == "/pokemon" && event.key === "Enter") {
+      navigate("/");
       handleSearchChange();
-    }, delay);
-    setTimeoutId(newTimeoutId);
+    }
   };
 
   return (
@@ -44,6 +55,7 @@ const NavbarSearchInput = () => {
         type="text"
         placeholder="Type a pokemon name..."
         onChange={handleChange}
+        onKeyDown={handleEnter}
       />
       {inputValueRef.current.length === 0 ? (
         <IoSearchCircle className="search-input-icon" />

@@ -26,7 +26,7 @@ export const getPokemonData = async (
 
 export const getPokemonList = async (): Promise<PokemonsListType | null> => {
   try {
-    const response = await axios.get(BASE_URL + "?offset=1&limit=1016");
+    const response = await axios.get(BASE_URL + "?offset=0&limit=1017");
     const newPokemonList: PokemonsListType = response.data.results;
     return newPokemonList;
   } catch (error) {

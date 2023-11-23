@@ -1,14 +1,33 @@
 import pokeapiLogo from "@/assets/pokeapilogo.png";
 import "./Navbar.scss";
 import NavbarRightSide from "./NavbarRightSide";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useAppDispatch } from "@/hooks";
+import { setPokemonDataToInitial } from "@/slices/pokemonDataSlice";
+import { setCounterReset } from "@/slices/counterSlice";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const dispatch = useAppDispatch();
+  const handleClick = () => {
+    if (location.pathname === "/pokemon") {
+      dispatch(setPokemonDataToInitial());
+      dispatch(setCounterReset());
+      navigate("/");
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
+  };
   return (
     <div className="navbar-container">
       <div className="image-container">
-        <a href="/">
-          <img alt="pokeapi-logo" src={pokeapiLogo} className="navbar-logo" />
-        </a>
+        <img
+          alt="pokeapi-logo"
+          src={pokeapiLogo}
+          className="navbar-logo"
+          onClick={handleClick}
+        />
       </div>
       <NavbarRightSide />
     </div>

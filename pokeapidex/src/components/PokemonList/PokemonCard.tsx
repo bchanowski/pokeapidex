@@ -4,6 +4,7 @@ import "./PokemonList.scss";
 import "@/shared/types.scss";
 import { useAppDispatch } from "@/hooks";
 import { setSelectedPokemon } from "@/slices/pokemonDataSlice";
+import { useNavigate } from "react-router-dom";
 type Props = {
   pokemon: PokemonType;
 };
@@ -12,6 +13,7 @@ const PokemonCard = ({ pokemon }: Props) => {
   const typeClass = "pokemon type-" + pokemon.types[0].type.name;
   const [pokemonId, setPokemonId] = useState("");
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     if (pokemon.id.toString().length === 4) setPokemonId(pokemon.id.toString());
     else if (pokemon.id.toString().length === 1)
@@ -21,13 +23,13 @@ const PokemonCard = ({ pokemon }: Props) => {
     else if (pokemon.id.toString().length === 3) setPokemonId("0" + pokemon.id);
   }, [pokemon.id]);
   const handleClick = () => {
-    console.log("test");
     dispatch(setSelectedPokemon(pokemon));
+    navigate("/pokemon");
   };
   return (
     <div className="pokemon-card" onClick={handleClick}>
       <div className={typeClass}>
-        <p className="pokemon-text">
+        <p>
           #{pokemonId} {pokemon.name}
         </p>
         <div className="pokemon-image-container">
