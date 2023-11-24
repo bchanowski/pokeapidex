@@ -1,9 +1,10 @@
-import { PokemonType } from "@/shared/types";
 import "./PokemonPage.scss";
+import { useAppSelector } from "@/hooks";
 
-type Props = { selectedPokemonData: PokemonType };
-
-const PokemonPageStats = ({ selectedPokemonData }: Props) => {
+const PokemonPageStats = () => {
+  const selectedPokemonData = useAppSelector(
+    (state) => state.pokemonData.pokemons[0]
+  );
   return (
     <div className="stat-bar">
       <p className="pokemon-page-title">Stats (Base Values):</p>

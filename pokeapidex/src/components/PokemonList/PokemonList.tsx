@@ -2,7 +2,7 @@ import { useEffect, useCallback } from "react";
 import { PokemonType } from "@/shared/types";
 import PokemonCard from "./PokemonCard";
 import "./PokemonList.scss";
-import LoadingSpinner from "@/shared/LoadingSpinner";
+import LoadingSpinner from "./LoadingSpinner";
 import { isAtBottom } from "./getIfAtBottom";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { useFetchPokemons } from "@/shared/useFetchPokemons";

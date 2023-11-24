@@ -10,7 +10,7 @@ const initialState: PokemonTypeState = {
 };
 
 const pokemonListSlice = createSlice({
-  name: "pokemonData",
+  name: "pokemonList",
   initialState,
   reducers: {
     setPokemonList: (

@@ -39,7 +39,7 @@ const PokemonCard = ({ pokemon }: Props) => {
             src={pokemon.sprites.front_default}
           />
         </div>
-        <p className="pokemon-text">
+        <p>
           {pokemon.types[0].type.name}{" "}
           {pokemon.types[1]?.type.name ? "& " + pokemon.types[1].type.name : ""}
         </p>

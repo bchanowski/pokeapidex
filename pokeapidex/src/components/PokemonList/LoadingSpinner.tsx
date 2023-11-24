@@ -1,5 +1,5 @@
 import { Oval } from "react-loader-spinner";
-import "./shared.scss";
+import "@/shared/shared.scss";
 import { useAppSelector } from "@/hooks";
 
 const LoadingSpinner = () => {

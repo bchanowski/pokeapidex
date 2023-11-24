@@ -1,11 +1,11 @@
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getPokemonData } from "@/shared/getPokemonData";
 import { setIsPokemonDataLoading } from "@/slices/isPokemonDataLoading";
-import { setPokemonData, setPokemons } from "@/slices/pokemonDataSlice";
+import { setPokemons } from "@/slices/pokemonDataSlice";
 import { useCallback } from "react";
 import { getPokemonCounterValue } from "./getPokemonCounterValue";
 import { PokemonTypeState } from "./types";
-export function useFetchPokemons() {
+export const useFetchPokemons = () => {
   const dispatch = useAppDispatch();
   const counter = useAppSelector((state) => state.counter.value);
   const searchValue = useAppSelector((state) => state.isSearching.searchValue);
@@ -13,18 +13,23 @@ export function useFetchPokemons() {
   return {
     fetchPokemons: useCallback(async () => {
       if (pokemonList) {
+        const counterValue = getPokemonCounterValue();
+        const pokemonsToAdd: PokemonTypeState = {
+          pokemons: [],
+        };
         if (searchValue.length > 0) {
+          dispatch(setIsPokemonDataLoading(true));
           const filteredPokemonList = pokemonList.filter((pokemon) =>
             pokemon.name.startsWith(searchValue.toLowerCase())
           );
 
-          for (let i = counter - 1; i < counter + 2; i++) {
-            if (i >= filteredPokemonList.length) return;
+          for (let i = counter - 1; i < counter + counterValue; i++) {
+            if (i >= filteredPokemonList.length) break;
             const newPokemon = await getPokemonData(
               filteredPokemonList[i].name
             );
             if (newPokemon) {
-              dispatch(setPokemonData(newPokemon));
+              pokemonsToAdd.pokemons[i] = newPokemon;
             }
           }
         } else {
@@ -32,11 +37,7 @@ export function useFetchPokemons() {
             dispatch(setIsPokemonDataLoading(false));
             return;
           }
-          const counterValue = getPokemonCounterValue();
           dispatch(setIsPokemonDataLoading(true));
-          const pokemonsToAdd: PokemonTypeState = {
-            pokemons: [],
-          };
           for (let i = counter; i < counter + counterValue; i++) {
             if (i > 1017) return;
             const newPokemon = await getPokemonData(i);
@@ -44,10 +45,10 @@ export function useFetchPokemons() {
               pokemonsToAdd.pokemons[i] = newPokemon;
             }
           }
-          dispatch(setPokemons(pokemonsToAdd));
-          dispatch(setIsPokemonDataLoading(false));
         }
+        dispatch(setPokemons(pokemonsToAdd));
+        dispatch(setIsPokemonDataLoading(false));
       }
     }, [counter, dispatch, searchValue, pokemonList]),
   };
-}
+};

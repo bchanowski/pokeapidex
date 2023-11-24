@@ -1,11 +1,10 @@
-import { PokemonType } from "@/shared/types";
+import { useAppSelector } from "@/hooks";
 import "./PokemonPage.scss";
 
-type Props = {
-  selectedPokemonData: PokemonType;
-};
-
-const PokemonPageTopSide = ({ selectedPokemonData }: Props) => {
+const PokemonPageTopSide = () => {
+  const selectedPokemonData = useAppSelector(
+    (state) => state.pokemonData.pokemons[0]
+  );
   return (
     <div className="pokemon-page-data-container">
       <div>

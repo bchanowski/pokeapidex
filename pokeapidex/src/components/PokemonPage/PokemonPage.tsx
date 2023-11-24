@@ -19,15 +19,15 @@ const PokemonPage = () => {
       {selectedPokemonData ? (
         <div className={typeClass}>
           <div className="pokemon-page-right-side ">
-            <PokemonPageTopSide selectedPokemonData={selectedPokemonData} />
-            <PokemonPageImages selectedPokemonData={selectedPokemonData} />
+            <PokemonPageTopSide />
+            <PokemonPageImages />
           </div>
           <div className="pokemon-page-left-side">
-            <PokemonPageStats selectedPokemonData={selectedPokemonData} />
+            <PokemonPageStats />
           </div>
         </div>
       ) : (
-        <h1>Unfortunately there is no pokemon selected for this page!</h1>
+        <h1>Unfortunately there is no pokemon selected!</h1>
       )}
     </div>
   );
