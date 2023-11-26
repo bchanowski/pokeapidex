@@ -1,6 +1,6 @@
 import { IoSearchCircle } from "react-icons/io5";
 import { useCallback, useEffect, useState, useRef } from "react";
-import { useAppDispatch } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import { setPokemonDataToInitial } from "@/slices/pokemonDataSlice";
 import { setCounterReset } from "@/slices/counterSlice";
 import { setSearchingValue } from "@/slices/isSearchingSlice";
@@ -12,6 +12,7 @@ const NavbarSearchInput = () => {
   const inputValueRef = useRef<string>("");
   const location = useLocation();
   const navigate = useNavigate();
+  const searchValue = useAppSelector((state) => state.isSearching.searchValue);
   const delay = 1000;
   useEffect(() => {
     return () => {
@@ -22,14 +23,15 @@ const NavbarSearchInput = () => {
   }, [timeoutId]);
   const handleSearchChange = useCallback(() => {
     const latestInputValue = inputValueRef.current;
-    dispatch(setPokemonDataToInitial());
-    dispatch(setCounterReset());
+    if (latestInputValue !== searchValue) {
+      dispatch(setPokemonDataToInitial());
+      dispatch(setCounterReset());
+    }
     dispatch(setSearchingValue(latestInputValue));
-  }, [dispatch]);
+  }, [dispatch, searchValue]);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-    const newValue = event.target.value;
-    inputValueRef.current = newValue;
+    inputValueRef.current = event.target.value;
     if (location.pathname === "/") {
       if (timeoutId) {
         clearTimeout(timeoutId);
@@ -43,7 +45,8 @@ const NavbarSearchInput = () => {
   const handleEnter = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (location.pathname == "/pokemon" && event.key === "Enter") {
       navigate("/");
-      handleSearchChange();
+      dispatch(setPokemonDataToInitial());
+      dispatch(setCounterReset());
     }
   };
 
