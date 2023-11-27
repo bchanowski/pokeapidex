@@ -5,9 +5,6 @@
   height: auto;
   display: flex;
   justify-content: center;
-  @media screen and (max-width: 700px) {
-    margin-top: 280px;
-  }
 }
 
 .pokemon-page-card {
@@ -27,14 +24,13 @@
 
 .pokemon-page-img {
   background-color: rgba(0, 0, 0, 0.2);
-  height: 30svh;
+  height: 20svh;
   border-radius: 15px;
   margin: 30px 10px;
 }
 
 .pokemon-page-text {
-  display: inline-block;
-  margin: 5px 10px;
+  margin: 5px 15px;
 }
 
 .range-view {
@@ -45,21 +41,25 @@
 }
 
 .pokemon-page-left-side {
-  width: 80%;
+  width: 40%;
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 15px;
   padding: 25px;
+  @media screen and (max-width: 1580px) {
+    width: 80%;
+  }
 }
 
 .pokemon-page-data-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   flex-wrap: wrap;
-
-  @media screen and (max-width: 705px) {
+  width: 45svw;
+  @media screen and (max-width: 1580px) {
+    width: 90svw;
+  }
+  @media screen and (max-width: 890px) {
     flex-direction: column;
-    margin: 0px;
-    padding: 0px;
   }
 }
 

@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useAppDispatch } from "@/hooks";
 import { setPokemonDataToInitial } from "@/slices/pokemonDataSlice";
 import { setCounterReset } from "@/slices/counterSlice";
+import { setSearchingValue } from "@/slices/isSearchingSlice";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -12,11 +13,12 @@ const Navbar = () => {
   const dispatch = useAppDispatch();
   const handleClick = () => {
     if (location.pathname === "/pokemon") {
+      dispatch(setSearchingValue(""));
       dispatch(setPokemonDataToInitial());
       dispatch(setCounterReset());
       navigate("/");
     } else {
-      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
   return (

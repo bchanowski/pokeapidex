@@ -7,12 +7,14 @@ import { useAppDispatch } from "./hooks";
 import { setPokemonDataToInitial } from "./slices/pokemonDataSlice";
 import { useFetchPokemons } from "./shared/useFetchPokemons";
 import { setCounterReset } from "./slices/counterSlice";
+import { setSearchingValue } from "./slices/isSearchingSlice";
 
 function App() {
   const dispatch = useAppDispatch();
   const { fetchPokemons } = useFetchPokemons();
   useEffect(() => {
     const handleNavigation = () => {
+      dispatch(setSearchingValue(""));
       dispatch(setCounterReset());
       dispatch(setPokemonDataToInitial());
       fetchPokemons();

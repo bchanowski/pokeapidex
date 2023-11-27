@@ -17,16 +17,20 @@ const PokemonPageImages = () => {
           src={selectedPokemonData.sprites.back_default}
         />
       </div>
-      <div>
-        <img
-          className="pokemon-page-img"
-          src={selectedPokemonData.sprites.front_shiny}
-        />
-        <img
-          className="pokemon-page-img"
-          src={selectedPokemonData.sprites.back_shiny}
-        />
-      </div>
+      {selectedPokemonData.sprites.front_shiny ? (
+        <div>
+          <img
+            className="pokemon-page-img"
+            src={selectedPokemonData.sprites.front_shiny}
+          />
+          <img
+            className="pokemon-page-img"
+            src={selectedPokemonData.sprites.back_shiny}
+          />
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
