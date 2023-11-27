@@ -17,8 +17,8 @@ Pokemon list show all the pokemon there are, it has an infinite scroll functiona
 
 ### Pokemon Page  
 After clicking on one of the pokemons we are directed to a single pokemon page that show more info about given option.  
-![image](https://github.com/bchanowski/pokeapidex-react-ts/assets/92587389/0f8fd9ff-b8e7-4cf1-a336-c39325723f85)  
-![image](https://github.com/bchanowski/pokeapidex-react-ts/assets/92587389/16f296bb-bb79-4ea5-8137-1aba68f88453)  
+![image](https://github.com/bchanowski/pokeapidex-react-ts/assets/92587389/bc52f1ca-8070-4bb6-a3a8-509b96c9b006)
+
 
 ### Responsivnes  
 The app is also responsive to mobile devices  
@@ -29,6 +29,6 @@ The app is also responsive to mobile devices
 
 ### WIP  
 -Sorting by generation  
--Sorting by type
--Abilities and types tooltips
--Evolution chart
+-Sorting by type  
+-Abilities and types tooltips  
+-Evolution chart  
