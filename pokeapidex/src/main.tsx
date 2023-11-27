@@ -5,7 +5,7 @@ import "./main.scss";
 import { Provider } from "react-redux";
 import store from "./store.ts";
 import { BrowserRouter } from "react-router-dom";
-import ScrollToTop from "./scrollToTop.tsx";
+import ScrollToTop from "./ScrollToTop.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
