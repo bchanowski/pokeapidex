@@ -23,7 +23,7 @@ export const useFetchPokemons = () => {
             pokemon.name.startsWith(searchValue.toLowerCase())
           );
 
-          for (let i = counter - 1; i < counter + counterValue; i++) {
+          for (let i = counter - 1; i < counter + counterValue - 1; i++) {
             if (i >= filteredPokemonList.length) break;
             const newPokemon = await getPokemonData(
               filteredPokemonList[i].name
