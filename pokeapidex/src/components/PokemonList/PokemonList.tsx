@@ -3,11 +3,12 @@ import { PokemonType } from "@/shared/types";
 import PokemonCard from "./PokemonCard";
 import "./PokemonList.scss";
 import LoadingSpinner from "./LoadingSpinner";
-import { isAtBottom } from "./getIfAtBottom";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { useFetchPokemons } from "@/shared/useFetchPokemons";
 import { setCounter } from "@/slices/counterSlice";
 import { getPokemonCounterValue } from "@/shared/getPokemonCounterValue";
+import { setIsPokemonDataLoading } from "@/slices/isPokemonDataLoading";
+import { isAtBottom } from "./getIfAtBottom";
 
 const PokemonList = () => {
   const pokemonData = useAppSelector((state) => state.pokemonData);
@@ -16,19 +17,28 @@ const PokemonList = () => {
   const dispatch = useAppDispatch();
   const handleScroll = useCallback(() => {
     if (isSearching) return;
-    const atBottom = isAtBottom();
-    if (atBottom) {
+    const bottom = isAtBottom();
+    if (bottom) {
       dispatch(setCounter(getPokemonCounterValue()));
       fetchPokemons();
     }
   }, [dispatch, fetchPokemons, isSearching]);
   useEffect(() => {
     if (!isSearching) fetchPokemons();
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
+    let timer: NodeJS.Timeout;
+    const handleScrollWithTimeout = () => {
+      clearTimeout(timer);
+      dispatch(setIsPokemonDataLoading(true));
+      timer = setTimeout(() => {
+        handleScroll();
+      }, 500);
     };
-  }, [handleScroll, fetchPokemons, isSearching]);
+    window.addEventListener("scroll", handleScrollWithTimeout);
+    return () => {
+      window.removeEventListener("scroll", handleScrollWithTimeout);
+      clearTimeout(timer);
+    };
+  }, [handleScroll, fetchPokemons, isSearching, dispatch]);
   return (
     <div className="pokemon-card-container" onScroll={handleScroll}>
       {pokemonData.pokemons.map((pokemon: PokemonType, key) => (
