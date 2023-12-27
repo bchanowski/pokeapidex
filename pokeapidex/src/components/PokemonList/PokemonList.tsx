@@ -17,21 +17,21 @@ const PokemonList = () => {
   const dispatch = useAppDispatch();
   const handleScroll = useCallback(() => {
     if (isSearching) return;
-    const bottom = isAtBottom();
-    if (bottom) {
-      dispatch(setCounter(getPokemonCounterValue()));
-      fetchPokemons();
-    }
+    dispatch(setCounter(getPokemonCounterValue()));
+    fetchPokemons();
   }, [dispatch, fetchPokemons, isSearching]);
   useEffect(() => {
     if (!isSearching) fetchPokemons();
     let timer: NodeJS.Timeout;
     const handleScrollWithTimeout = () => {
       clearTimeout(timer);
-      dispatch(setIsPokemonDataLoading(true));
-      timer = setTimeout(() => {
-        handleScroll();
-      }, 500);
+      const bottom = isAtBottom();
+      if (bottom) {
+        dispatch(setIsPokemonDataLoading(true));
+        timer = setTimeout(() => {
+          handleScroll();
+        }, 200);
+      }
     };
     window.addEventListener("scroll", handleScrollWithTimeout);
     return () => {
